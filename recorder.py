@@ -1,42 +1,45 @@
-"""PyAudio Example: Play a wave file (callback version)."""
-
-import pyaudio
+from pyaudio import PyAudio, paInt16
 import wave
 import time
-import sys
+from threading import Thread
 
-# if len(sys.argv) < 2:
-#     print("Plays a wave file.\n\nUsage: %s filename.wav" % sys.argv[0])
-#     sys.exit(-1)
+class Recorder():
 
-wf = wave.open('test.wav', 'rb')
+	def __init__(self):
+		self.status = "stop"
+		self.frames = []
+		self.pa = PyAudio()
+		self.rate = 44100
+		self.chunck = 2048
+		self.format = paInt16
+		self.channels = 2
 
-# instantiate PyAudio (1)
-p = pyaudio.PyAudio()
 
-# define callback (2)
-def callback(in_data, frame_count, time_info, status):
-    data = wf.readframes(frame_count)
-    return (data, pyaudio.paContinue)
+	def start_record(self):
+		self.status = "play"
+		self.frames = []
+		stream = self.pa.open(format=self.format, channels=self.channels, rate=self.rate, input=True, frames_per_buffer=self.chunck)
+		while self.status == "play":
+		# for i in range(10):
+			data = stream.read(self.chunck)
+			self.frames.append(data)
+			print("* recording")
+		
+		stream.close()
 
-# open stream using callback (3)
-stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
-                channels=wf.getnchannels(),
-                rate=wf.getframerate(),
-                output=True,
-                stream_callback=callback)
+		wf = wave.open('test_recording.wav', 'wb')
+		wf.setnchannels(self.channels)
+		wf.setsampwidth(self.pa.get_sample_size(self.format))
+		wf.setframerate(self.rate)
+		wf.writeframes(b''.join(self.frames))
+		wf.close()
 
-# start the stream (4)
-stream.start_stream()
+	def stop(self):
+		self.status = "stop"
 
-# wait for stream to finish (5)
-while stream.is_active():
-    time.sleep(0.1)
-
-# stop stream (6)
-stream.stop_stream()
-stream.close()
-wf.close()
-
-# close PyAudio (7)
-p.terminate()
+rec = Recorder()
+t = Thread(target=rec.start_record())
+t.start()
+time.sleep(2)
+t.join()
+rec.stop()
