@@ -1,7 +1,7 @@
 from pyaudio import PyAudio, paInt16
 import wave
 import time
-from threading import Thread
+from threading import Thread, currentThread
 
 class Recorder():
 
@@ -17,6 +17,7 @@ class Recorder():
 
 	def start_record(self):
 		self.status = "play"
+		t = currentThread()
 		self.frames = []
 		stream = self.pa.open(format=self.format, channels=self.channels, rate=self.rate, input=True, frames_per_buffer=self.chunck)
 		while self.status == "play":
@@ -40,6 +41,19 @@ class Recorder():
 rec = Recorder()
 t = Thread(target=rec.start_record())
 t.start()
-time.sleep(2)
-t.join()
-rec.stop()
+time.sleep(3)
+t.do_run = False
+# rec.stop()
+
+# def func1():
+# 	for i in range(5):
+# 		print(1)
+
+# def func2():
+# 	for i in range(3):
+# 		print(2)
+
+# t1 = Thread(target=func1)
+# t2 = Thread(target=func2)
+# t1.start()
+# t2.start()
