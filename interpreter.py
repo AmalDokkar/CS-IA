@@ -83,6 +83,8 @@ class Interpreter():
 		time.sleep(1)
 
 interpreter = Interpreter()
+interpreter.set_src_lang('es')
+interpreter.set_dest_lang('en')
 interpreter.start()
-x = input()
+x = input("Enter something to stop.")
 interpreter.stop()
