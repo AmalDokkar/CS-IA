@@ -12,12 +12,14 @@ class Interpreter():
 	def __init__(self):
 		self.global_status = 'paused'
 		self.path = os.getcwd()
+
 		self.src_lang = 'es'
 		self.dest_lang = 'en'
 		self.transcribed_text = ""
 		self.translated_text = ""
 		self.code_to_lang = LANGUAGES
 		self.lang_to_code = {lang: code for code, lang in LANGUAGES.items()}
+		
 		self.recognizer = sr.Recognizer()
 		self.recognizer.pause_threshold = 1
 		self.translator = Translator()
@@ -59,11 +61,15 @@ class Interpreter():
 				self.interp_translate(text)
 
 	def interp_translate(self, text):
+		if self.global_status == 'paused':
+			return
 		translation = self.translator.translate(text, dest=self.dest_lang, src=self.src_lang)
-		self.translated_text = translation.text # Send signal
+		self.translated_text = translation.text # Send signal	
 		self.inter_reproduce(translation.text)
 
 	def inter_reproduce(self, text):
+		if self.global_status == 'paused':
+			return
 		tts = gTTS(text, lang=self.dest_lang)
 		tts.save(self.path + '/temp.mp3')
 		playsound(self.path + '/temp.mp3')
