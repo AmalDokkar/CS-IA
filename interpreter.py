@@ -1,6 +1,7 @@
+import os
+import time
 from threading import Thread
 from googletrans import Translator, LANGUAGES
-# from speech_recognition import Recognizer, Microphone, AudioFile
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
@@ -10,41 +11,66 @@ class Interpreter():
 
 	def __init__(self):
 		self.global_status = 'paused'
-		self.recognize_satus = 'available'
-		self.translate_satus = 'available'
-		self.reproduce_satus = 'available'
-
-		self.origin_language = 'es'
-		self.destination_language = 'en'
-		self.transcribed_text = []
-		self.translated_text = []
-
+		self.path = os.getcwd()
+		self.src_lang = 'es'
+		self.dest_lang = 'en'
+		self.transcribed_text = ""
+		self.translated_text = ""
+		self.code_to_lang = LANGUAGES
+		self.lang_to_code = {lang: code for code, lang in LANGUAGES.items()}
 		self.recognizer = sr.Recognizer()
-		self.recognizer.energy_threshold = 100 # Must be adjusted by hand
 		self.recognizer.pause_threshold = 1
 		self.translator = Translator()
+
+	def set_src_lang(self, lang='es'):
+		self.src_lang = lang
+
+	def set_dest_lang(self, lang='en'):
+		self.dest_lang = lang
+
+	def start(self):
+		self.global_status = 'interpreting'
+		t = Thread(target=self.interp_recognize)
+		t.start()
+
+	def stop(self):
+		self.global_status = 'paused'
 		
-	def interpreter_recognize(self):
+	def interp_recognize(self):
+		if self.global_status == 'paused':
+			return
 		with sr.Microphone() as source:
-			print("Listening...")
-			audio = self.recognizer.listen(source)
-			print("Recgonizing...")
-			text = self.recognizer.recognize_google(audio, language='es')
-			print("Recgonized text:", text)
-			self.transcribed_text.append(text)
-			self.interpreter_translate(text)
+			try:
+				print('Speak now') # Send signal
+				audio = self.recognizer.listen(source, timeout=10, phrase_time_limit=30)
+				text = self.recognizer.recognize_google(audio, language=self.src_lang)
+			except sr.WaitTimeoutError:
+				print('WaitTimeoutError')
+				t = Thread(target=self.interp_recognize)
+				t.start()
+			except sr.UnknownValueError:
+				print('UnknownValueError')
+				t = Thread(target=self.interp_recognize)
+				t.start()
+			else:
+				self.transcribed_text = text # Send signal
+				t = Thread(target=self.interp_recognize)
+				t.start()
+				self.interp_translate(text)
 
-	def interpreter_translate(self, text):
-		translation = self.translator.translate(text, dest='de', src='es')
-		self.translated_text.append(translation.text)
-		print("Translated text:",  translation.text)
-		self.interpreter_reproduce(translation.text)
+	def interp_translate(self, text):
+		translation = self.translator.translate(text, dest=self.dest_lang, src=self.src_lang)
+		self.translated_text = translation.text # Send signal
+		self.inter_reproduce(translation.text)
 
-	def interpreter_reproduce(self, text):
-		tts = gTTS(text, lang='de')
-		tts.save('hola.mp3')
-		playsound('hola.mp3')
+	def inter_reproduce(self, text):
+		tts = gTTS(text, lang=self.dest_lang)
+		tts.save(self.path + '/temp.mp3')
+		playsound(self.path + '/temp.mp3')
+		os.remove(self.path + '/temp.mp3')
+		time.sleep(1)
 
-# print(LANGUAGES)
 interpreter = Interpreter()
-interpreter.interpreter_recognize()
+interpreter.start()
+x = input()
+interpreter.stop()
