@@ -30,6 +30,12 @@ class Interpreter():
 	def set_dest_lang(self, lang='en'):
 		self.dest_lang = lang
 
+	def get_transcribed_text(self):
+		return self.transcribed_text
+	
+	def get_translated_text(self):
+		return self.translated_text
+
 	def start(self):
 		self.global_status = 'interpreting'
 		t = Thread(target=self.interp_recognize)
