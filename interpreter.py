@@ -85,6 +85,7 @@ class Interpreter():
 interpreter = Interpreter()
 interpreter.set_src_lang('es')
 interpreter.set_dest_lang('en')
+
 interpreter.start()
 x = input("Enter something to stop.")
 interpreter.stop()
