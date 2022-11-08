@@ -21,3 +21,8 @@
 # win.show_all()
 # Gtk.main()
 
+import speech_recognition as sr
+import mute_alsa
+
+mics = sr.Microphone().list_microphone_names()
+print(mics[14])

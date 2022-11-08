@@ -5,6 +5,8 @@ from googletrans import Translator, LANGUAGES
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
+import mute_alsa
+
 
 class Interpreter():
 	'docstring. description of the class'
@@ -47,7 +49,7 @@ class Interpreter():
 	def interp_recognize(self):
 		if self.global_status == 'paused':
 			return
-		with sr.Microphone() as source:
+		with sr.Microphone(device_index=14, sample_rate=44100) as source:
 			try:
 				print('Speak now') # Send signal
 				audio = self.recognizer.listen(source, timeout=10, phrase_time_limit=30)
@@ -89,3 +91,6 @@ interpreter.set_dest_lang('en')
 interpreter.start()
 x = input("Enter something to stop.")
 interpreter.stop()
+
+# UnknownValueError at 30 seconds
+# WaitTimeoutError also at 30 seconds
