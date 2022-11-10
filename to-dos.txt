@@ -13,6 +13,8 @@ TO-DOs
         2.2.1 When the combo box option is change set the src/dest language
             2.2.1.1 Only allow to switch language when translation is paused
             2.2.1.2 Create dictionaries for the languages
+            NOT A COMBOBOX           
+            Dialect app uses toggle buttons and popovers (aesthetic +100)
         2.2.2 When the play button is toggled change the text to 'stop' and
               start the translation
             2.2.3.1 Here change the status of the spin button, this spin button will stop when the voicing is over

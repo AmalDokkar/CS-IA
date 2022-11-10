@@ -13,6 +13,7 @@ gi.require_version("Gtk", "3.0") # Really necessary?
 from gi.repository import Gtk, Gdk
 
 from interpreter import Interpreter
+import dictionaries
 
 
 class Handler():
@@ -29,3 +30,6 @@ class Handler():
 		else:
 			button.set_label('Play')
 			# self.interpreter.stop()
+
+	def on_changed_src_lang(self, comboBox):
+		pass

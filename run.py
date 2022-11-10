@@ -14,8 +14,10 @@ from gi.repository import Gtk
 
 from interpreter import Interpreter
 from handler import Handler
+from dictionaries import *
 
 ######################################################
+
 
 # interpreter = Interpreter()
 handler = Handler()
@@ -23,6 +25,12 @@ handler = Handler()
 builder = Gtk.Builder()
 builder.add_from_file("gui.glade")
 builder.connect_signals(Handler())
+
+# src_comboBox = builder.get_object("SourceLanguageComboText")
+# dest_comboBox = builder.get_object("DestinationLanguageComboText")
+# for lang in languages:
+# 	src_comboBox.append_text(lang)
+# 	dest_comboBox.append_text(lang)
 
 window = builder.get_object("MainWindow")
 window.connect("destroy", Gtk.main_quit)

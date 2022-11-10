@@ -7,6 +7,8 @@ from gtts import gTTS
 from playsound import playsound
 import mute_alsa
 
+import dictionaries
+
 
 class Interpreter():
 	'docstring. description of the class'
@@ -19,8 +21,6 @@ class Interpreter():
 		self.dest_lang = 'en'
 		self.transcribed_text = ""
 		self.translated_text = ""
-		self.code_to_lang = LANGUAGES
-		self.lang_to_code = {lang: code for code, lang in LANGUAGES.items()}
 		
 		self.recognizer = sr.Recognizer()
 		self.recognizer.pause_threshold = 1
