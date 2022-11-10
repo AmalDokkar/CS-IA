@@ -17,7 +17,7 @@ from handler import Handler
 
 ######################################################
 
-interpreter = Interpreter()
+# interpreter = Interpreter()
 handler = Handler()
 
 builder = Gtk.Builder()
