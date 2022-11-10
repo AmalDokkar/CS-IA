@@ -7,6 +7,7 @@ from gtts import gTTS
 from playsound import playsound
 import mute_alsa
 
+
 class Interpreter():
 	'docstring. description of the class'
 

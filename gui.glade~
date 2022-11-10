@@ -66,7 +66,6 @@
               <object class="GtkEntry" id="SpokenTextEntry">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="editable">False</property>
               </object>
               <packing>
                 <property name="expand">True</property>

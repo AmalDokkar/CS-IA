@@ -6,16 +6,3 @@ from gi.repository import Gtk
 
 class Handler():
 	pass
-
-# Actually this should not be in this file
-# Remember to conenct main_quit() manually
-
-builder = Gtk.Builder()
-builder.add_from_file("gui.glade")
-builder.connect_signals(Handler())
-
-window = builder.get_object("MainWindow")
-window.connect("destroy", Gtk.main_quit)
-window.show_all()
-
-Gtk.main()
