@@ -7,7 +7,6 @@ from gtts import gTTS
 from playsound import playsound
 import mute_alsa
 
-
 class Interpreter():
 	'docstring. description of the class'
 
@@ -84,13 +83,13 @@ class Interpreter():
 		os.remove(self.path + '/temp.mp3')
 		time.sleep(1)
 
-interpreter = Interpreter()
-interpreter.set_src_lang('es')
-interpreter.set_dest_lang('en')
+# interpreter = Interpreter()
+# interpreter.set_src_lang('es')
+# interpreter.set_dest_lang('en')
 
-interpreter.start()
-x = input("Enter something to stop.")
-interpreter.stop()
+# interpreter.start()
+# x = input("Enter something to stop.")
+# interpreter.stop()
 
 # UnknownValueError at 30 seconds
 # WaitTimeoutError also at 30 seconds
