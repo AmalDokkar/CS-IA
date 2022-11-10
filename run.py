@@ -13,7 +13,7 @@ gi.require_version("Gtk", "3.0") # Really necessary?
 from gi.repository import Gtk
 
 from interpreter import Interpreter
-from handler import Handlerte
+from handler import Handler
 
 ######################################################
 

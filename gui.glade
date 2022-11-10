@@ -113,10 +113,12 @@
             </child>
             <child>
               <object class="GtkToggleButton" id="PlayPauseToggleButton">
-                <property name="label" translatable="yes">Play/Pause</property>
+                <property name="label" translatable="yes">Play</property>
+                <property name="width-request">100</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
+                <signal name="toggled" handler="on_toggled_button" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
