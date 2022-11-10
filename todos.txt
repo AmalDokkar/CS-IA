@@ -15,7 +15,9 @@ TO-DOs
             2.2.1.2 Create dictionaries for the languages
         2.2.2 When the play button is toggled change the text to 'stop' and
               start the translation
-            2.2.3.1 Here change the status of the spin button 
+            2.2.3.1 Here change the status of the spin button, this spin button will stop when the voicing is over
+        2.2.3 Does the volume button work automatically?
+        2.2.4 Add a switch button between src and dest languages!!!
         
 3. Create a main file where Interpreter() and Handler() are imported and 
    simply create window and run the program
