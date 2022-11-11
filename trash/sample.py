@@ -22,7 +22,7 @@
 # Gtk.main()
 
 import speech_recognition as sr
-import mute_alsa
+import interpreter.mute_alsa as mute_alsa
 
 mics = sr.Microphone().list_microphone_names()
 print(mics[14])

@@ -5,7 +5,7 @@ from googletrans import Translator, LANGUAGES
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
-import mute_alsa
+import interpreter.mute_alsa as mute_alsa
 
 import dictionaries
 
@@ -22,6 +22,8 @@ class Interpreter():
 		self.transcribed_text = ""
 		self.translated_text = ""
 		
+		# for linux set device_index = 14 (default)
+		self.microphone = sr.Microphone(sample_rate=44100)
 		self.recognizer = sr.Recognizer()
 		self.recognizer.pause_threshold = 1
 		self.translator = Translator()
@@ -49,7 +51,9 @@ class Interpreter():
 	def interp_recognize(self):
 		if self.global_status == 'paused':
 			return
-		with sr.Microphone(device_index=14, sample_rate=44100) as source:
+		# file = AudioData('rec.wav')
+		# with file as source:
+		with self.microphone as source:
 			try:
 				print('Speak now') # Send signal
 				audio = self.recognizer.listen(source, timeout=10, phrase_time_limit=30)

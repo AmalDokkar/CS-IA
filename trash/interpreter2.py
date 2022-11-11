@@ -5,7 +5,7 @@ from googletrans import Translator, LANGUAGES
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
-import mute_alsa
+import interpreter.mute_alsa as mute_alsa
 
 
 class Interpreter():

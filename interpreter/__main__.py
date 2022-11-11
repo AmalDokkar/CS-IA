@@ -6,15 +6,15 @@ from googletrans import Translator, LANGUAGES
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
-import mute_alsa
+import interpreter.mute_alsa as mute_alsa
 
 import gi
 gi.require_version("Gtk", "3.0") # Really necessary?
 from gi.repository import Gtk
 
-from interpreter import Interpreter
-from handler import Handler
-from dictionaries import *
+from interpreter.interpreter import Interpreter
+from interpreter.handler import Handler
+from dictionaries import * # try import dictionaries as dic
 
 ######################################################
 
