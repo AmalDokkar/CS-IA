@@ -6,31 +6,33 @@ from googletrans import Translator, LANGUAGES
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
-import interpreter.mute_alsa as mute_alsa
+import mute_alsa
 
 import gi
 gi.require_version("Gtk", "3.0") # Really necessary?
-from gi.repository import Gtk
+from gi.repository import Gtk, Gio
 
-from interpreter.interpreter import Interpreter
-from interpreter.handler import Handler
+from interpreter import Interpreter
+from handler import Handler
 from dictionaries import * # try import dictionaries as dic
 
 ######################################################
 
+def start_languge_menus(menu):
+	menuModel = Gio.Menu()
+	for i in range(5):
+		menuModel.append(languages[i])
+	menu.set_menu_model(menuModel)
 
 # interpreter = Interpreter()
 handler = Handler()
 
 builder = Gtk.Builder()
-builder.add_from_file("gui.glade")
+builder.add_from_file("interface/gui.glade")
 builder.connect_signals(Handler())
 
-# src_comboBox = builder.get_object("SourceLanguageComboText")
-# dest_comboBox = builder.get_object("DestinationLanguageComboText")
-# for lang in languages:
-# 	src_comboBox.append_text(lang)
-# 	dest_comboBox.append_text(lang)
+src_Menu = builder.get_object("SourceLanguageMenu")
+start_languge_menus(src_Menu)
 
 window = builder.get_object("MainWindow")
 window.connect("destroy", Gtk.main_quit)
