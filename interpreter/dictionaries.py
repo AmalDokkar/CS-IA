@@ -1,5 +1,12 @@
-from googletrans import LANGUAGES
 
-code_to_lang = LANGUAGES
-lang_to_code = {lang: code for code, lang in LANGUAGES.items()}
-languages = list(lang_to_code.keys())
+code_to_lang = {'en': 'english',
+                'es': 'spanish',
+                'fr': 'french',
+                'de': 'german'}
+
+lang_to_code = {'english': 'en',
+                'spanish': 'es',
+                'french': 'fr',
+                'german': 'de'}
+                
+languages = ['english', 'spanish', 'french', 'german']
