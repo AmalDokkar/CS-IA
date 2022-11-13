@@ -21,42 +21,10 @@
             <property name="can-focus">False</property>
             <property name="spacing">6</property>
             <child>
-              <object class="GtkMenuButton" id="SourceLanguageMenu">
+              <object class="GtkComboBoxText" id="SrcLangComboBox">
                 <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="focus-on-click">False</property>
-                <property name="receives-default">True</property>
-                <child>
-                  <object class="GtkBox" id="SrcLangMenuBox">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="spacing">6</property>
-                    <child>
-                      <object class="GtkLabel" id="SrcLangLabel">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="label" translatable="yes">label</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkImage" id="SrcLangImage">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="pixbuf">down_arrow.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
+                <property name="can-focus">False</property>
+                <signal name="changed" handler="on_changed_src_lang" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -75,6 +43,7 @@
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
+                    <signal name="clicked" handler="on_clicked_switch_button" swapped="no"/>
                     <child>
                       <object class="GtkImage" id="SwitchImage">
                         <property name="visible">True</property>
@@ -97,42 +66,10 @@
               </packing>
             </child>
             <child>
-              <object class="GtkMenuButton" id="DestinationLanguageMenu">
+              <object class="GtkComboBoxText" id="DestLangComboBox">
                 <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="focus-on-click">False</property>
-                <property name="receives-default">True</property>
-                <child>
-                  <object class="GtkBox" id="DestLangMenuBox">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="spacing">6</property>
-                    <child>
-                      <object class="GtkLabel" id="DestLangLabel">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="label" translatable="yes">label</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkImage" id="DestLangImage">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="pixbuf">down_arrow.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
+                <property name="can-focus">False</property>
+                <signal name="changed" handler="on_changed_dest_lang" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
