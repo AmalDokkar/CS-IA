@@ -48,10 +48,12 @@ class Interpreter():
 	# def get_translated_text(self):
 	# 	return self.translated_text
 
-	def start(self):
+	def start(self, hi):
+		hi()
 		self.global_status = 'interpreting'
 		t = Thread(target=self.interp_recognize)
 		t.start()
+		hi()
 
 	def stop(self):
 		self.global_status = 'paused'
@@ -107,13 +109,14 @@ class Interpreter():
 		srcBuffer = Gtk.TextBuffer()
 		i = srcBuffer.get_start_iter()
 		srcBuffer.do_insert_text(srcBuffer, i, self.transcribed_text, len(self.transcribed_text))
-		srcTextView = self.builder.get_object("SpokenTextBuffer")
-		srcTextView.set_buffer(srcBuffer) # ara falla aixo
+		srcTextView = self.builder.get_object("SpokenTextView")
+		srcTextView.set_buffer(srcBuffer)
 
 	def display_translated_text(self):
 		destBuffer = Gtk.TextBuffer()
-		destBuffer.do_insert_text(0, self.translated_text, len(self.translated_text))
-		destTextView = self.builder.get_object("TranslatedTextBuffer")
+		i = destBuffer.get_start_iter()
+		destBuffer.do_insert_text(destBuffer, i, self.translated_text, len(self.translated_text))
+		destTextView = self.builder.get_object("TranslatedTextView")
 		destTextView.set_buffer(destBuffer)
 
 # interpreter = Interpreter()

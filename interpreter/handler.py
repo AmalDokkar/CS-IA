@@ -16,6 +16,9 @@ from interpreter import Interpreter
 import dictionaries as dic
 
 
+def hi():
+	print("hello!")
+
 class Handler():
 	"docstring"
 
@@ -28,7 +31,7 @@ class Handler():
 
 		if active:
 			button.set_label('Pause')
-			self.interpreter.start()
+			self.interpreter.start(hi)
 		else:
 			button.set_label('Play')
 			self.interpreter.stop()
