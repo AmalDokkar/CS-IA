@@ -48,17 +48,17 @@ class Interpreter():
 	# def get_translated_text(self):
 	# 	return self.translated_text
 
-	def start(self, hi):
-		hi()
-		self.global_status = 'interpreting'
-		t = Thread(target=self.interp_recognize)
-		t.start()
-		hi()
+	# def start(self, hi):
+	# 	hi()
+	# 	self.global_status = 'interpreting'
+	# 	t = Thread(target=self.interp_recognize)
+	# 	t.start()
+	# 	hi()
 
 	def stop(self):
 		self.global_status = 'paused'
 		
-	def interp_recognize(self):
+	def interp_recognize(self, callback):
 		if self.global_status == 'paused':
 			return
 		
@@ -83,7 +83,8 @@ class Interpreter():
 				t.start()
 			else:
 				self.transcribed_text = text
-				self.display_spoken_text()
+				# self.display_spoken_text()
+				callback(text)
 				t = Thread(target=self.interp_recognize)
 				t.start()
 				self.interp_translate(text)

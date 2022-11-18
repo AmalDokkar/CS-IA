@@ -19,19 +19,27 @@ import dictionaries as dic
 def hi():
 	print("hello!")
 
+def callback(text):
+	print(text)
+
 class Handler():
 	"docstring"
 
 	def __init__(self, builder):
 		self.interpreter = Interpreter(builder)
 		self.builder = builder
+
+	def display_spoken_text(text):
+		pass
 	
 	def on_toggled_button(self, button):
 		active = button.get_active()
 
 		if active:
 			button.set_label('Pause')
-			self.interpreter.start(hi)
+			# self.interpreter.start(hi)
+			t = Thread(target=self.interpreter.interp_recognize(), args=(callback,))
+			t.start()
 		else:
 			button.set_label('Play')
 			self.interpreter.stop()
