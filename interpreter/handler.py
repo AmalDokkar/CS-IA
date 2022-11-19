@@ -16,32 +16,23 @@ from interpreter import Interpreter
 import dictionaries as dic
 
 
-def hi():
-	print("hello!")
-
-def callback(text):
-	print(text)
-
 class Handler():
 	"docstring"
 
 	def __init__(self, builder):
-		self.interpreter = Interpreter(builder)
+		self.interpreter = Interpreter(self.display_spoken_text, self.display_translated_text)
 		self.builder = builder
-
-	def display_spoken_text(text):
-		pass
 	
 	def on_toggled_button(self, button):
 		active = button.get_active()
 
 		if active:
-			button.set_label('Pause')
-			# self.interpreter.start(hi)
-			t = Thread(target=self.interpreter.interp_recognize(), args=(callback,))
+			button.set_label("Pause")
+			self.interpreter.start()
+			t = Thread(target=self.interpreter.interp_recognize())
 			t.start()
 		else:
-			button.set_label('Play')
+			button.set_label("Play")
 			self.interpreter.stop()
 
 	def on_changed_src_lang(self, comboBox):
@@ -67,3 +58,17 @@ class Handler():
 		dest.set_active(srcIdx)
 		self.interpreter.set_src_lang(dic.lang_to_code[destText])
 		self.interpreter.set_dest_lang(dic.lang_to_code[srcText])
+
+	def display_spoken_text(self, text):
+		srcBuffer = Gtk.TextBuffer()
+		i = srcBuffer.get_start_iter()
+		srcBuffer.do_insert_text(srcBuffer, i, text, len(text))
+		srcTextView = self.builder.get_object("SpokenTextView")
+		srcTextView.set_buffer(srcBuffer)
+
+	def display_translated_text(self, text):
+		destBuffer = Gtk.TextBuffer()
+		i = destBuffer.get_start_iter()
+		destBuffer.do_insert_text(destBuffer, i, text, len(text))
+		destTextView = self.builder.get_object("TranslatedTextView")
+		destTextView.set_buffer(destBuffer)
