@@ -29,8 +29,6 @@ class Handler():
 		if active:
 			button.set_label("Pause")
 			self.interpreter.start()
-			t = Thread(target=self.interpreter.interp_recognize())
-			t.start()
 		else:
 			button.set_label("Play")
 			self.interpreter.stop()

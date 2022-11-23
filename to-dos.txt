@@ -3,8 +3,9 @@ TO-DOs
 
 1. Implement listen_in_backgound() in interpreter
     1.1. Debug listening in linux
+        1.1.1 HELP I'M DESPERATE
 
 2. Write the handler class
 
     2.2 SIGNAL-CALLBACK
-        2.2.1 Spin button
+        2.2.1 Spin button? Or something else

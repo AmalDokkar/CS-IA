@@ -37,6 +37,8 @@ class Interpreter():
 
 	def start(self):
 		self.global_status = "interpreting"
+		t = Thread(target=self.interp_recognize)
+		t.start()
 
 	def stop(self):
 		self.global_status = "paused"
@@ -51,18 +53,19 @@ class Interpreter():
 		if self.global_status == "paused":
 			return
 		
-		with sr.AudioFile("/home/amaldok/Prog/CS-IA/tests/rec.wav") as source:
-		
-		# for linux set device_index = to default
-		# with sr.Microphone(sample_rate=44100, device_index=10) as source:
+		# For file
+		# with sr.AudioFile("/home/amaldok/Prog/CS-IA/tests/rec.wav") as source:
+		# For microphone
+		with sr.Microphone(sample_rate=44100, device_index=9) as source:
 			try:
 				print("Speak now") # Send signal
 				# For microphone
-				# audio = self.recognizer.listen(source, timeout=10, phrase_time_limit=30)
+				audio = self.recognizer.listen(source, timeout=10, phrase_time_limit=10)
 				print("Speech recorded")
 				# For file
-				audio = self.recognizer.record(source)
+				# audio = self.recognizer.record(source)
 				text = self.recognizer.recognize_google(audio, language=self.src_lang)
+				print("Text recognized")
 			except sr.WaitTimeoutError:
 				print("WaitTimeoutError")
 				t = Thread(target=self.interp_recognize)
@@ -73,22 +76,24 @@ class Interpreter():
 				t.start()
 			else:
 				self.spoken_text_callback(text)
-				# t = Thread(target=self.interp_recognize)
-				# t.start()
+				t = Thread(target=self.interp_recognize)
+				t.start()
 				self.interp_translate(text)
 
 	def interp_translate(self, text):
-		if self.global_status == 'paused':
-			return
+		# if self.global_status == 'paused':
+		# 	return
 		translation = self.translator.translate(text, dest=self.dest_lang, src=self.src_lang)
+		print("Text translated")
 		self.translated_text_callback(translation.text)
 		self.inter_reproduce(translation.text)
 
 	def inter_reproduce(self, text):
-		if self.global_status == 'paused':
-			return
+		# if self.global_status == 'paused':
+		# 	return
 		tts = gTTS(text, lang=self.dest_lang)
 		tts.save(self.path + "/temp.mp3")
+		print("Playing audio")
 		playsound(self.path + "/temp.mp3")
 		os.remove(self.path + "/temp.mp3")
 		time.sleep(1)
