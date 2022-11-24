@@ -9,7 +9,7 @@ from playsound import playsound
 import mute_alsa as mute_alsa
 
 import gi
-gi.require_version("Gtk", "3.0") # Really necessary?
+gi.require_version("Gtk", "3.0") # Really necessary? yes
 from gi.repository import Gtk, Gdk
 
 from interpreter import Interpreter
@@ -56,6 +56,10 @@ class Handler():
 		dest.set_active(srcIdx)
 		self.interpreter.set_src_lang(dic.lang_to_code[destText])
 		self.interpreter.set_dest_lang(dic.lang_to_code[srcText])
+
+	def on_clicked_copyclipboard(self, button):
+		destText = self.builder.get_object("TranslatedTextView")
+		destText.do_copy_clipboard(destText)
 
 	def display_spoken_text(self, text):
 		srcBuffer = Gtk.TextBuffer()

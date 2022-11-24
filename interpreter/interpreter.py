@@ -86,6 +86,7 @@ class Interpreter():
 		translation = self.translator.translate(text, dest=self.dest_lang, src=self.src_lang)
 		print("Text translated")
 		self.translated_text_callback(translation.text)
+		print(text)
 		self.inter_reproduce(translation.text)
 
 	def inter_reproduce(self, text):
@@ -95,6 +96,7 @@ class Interpreter():
 		tts.save(self.path + "/temp.mp3")
 		print("Playing audio")
 		playsound(self.path + "/temp.mp3")
+		print("Audio played")
 		os.remove(self.path + "/temp.mp3")
 		time.sleep(1)
 
