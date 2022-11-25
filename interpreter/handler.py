@@ -58,8 +58,13 @@ class Handler():
 		self.interpreter.set_dest_lang(dic.lang_to_code[srcText])
 
 	def on_clicked_copyclipboard(self, button):
-		destText = self.builder.get_object("TranslatedTextView")
-		destText.do_copy_clipboard(destText)
+		destTextView = self.builder.get_object("TranslatedTextView")
+		destBuffer = destTextView.get_buffer()
+		start = destBuffer.get_start_iter()
+		end = destBuffer.get_end_iter()
+		text = destBuffer.get_text(start, end, False)
+		clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
+		clipboard.set_text(text, len(text))
 
 	def display_spoken_text(self, text):
 		srcBuffer = Gtk.TextBuffer()
