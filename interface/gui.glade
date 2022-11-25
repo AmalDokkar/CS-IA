@@ -4,8 +4,8 @@
   <requires lib="gtk+" version="3.24"/>
   <object class="GtkWindow" id="MainWindow">
     <property name="can-focus">False</property>
-    <property name="default-width">700</property>
-    <property name="default-height">300</property>
+    <property name="default-width">580</property>
+    <property name="default-height">250</property>
     <child>
       <object class="GtkBox" id="MainBox">
         <property name="visible">True</property>
@@ -19,7 +19,7 @@
           <object class="GtkBox" id="LanguageChooserBox">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="spacing">6</property>
+            <property name="spacing">5</property>
             <child>
               <object class="GtkComboBoxText" id="SrcLangComboBox">
                 <property name="visible">True</property>
@@ -48,7 +48,7 @@
                       <object class="GtkImage" id="SwitchImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="pixbuf">switch.png</property>
+                        <property name="pixbuf">images/switch.png</property>
                       </object>
                     </child>
                   </object>
@@ -96,6 +96,10 @@
                 <property name="can-focus">True</property>
                 <property name="editable">False</property>
                 <property name="wrap-mode">word</property>
+                <property name="left-margin">5</property>
+                <property name="right-margin">5</property>
+                <property name="top-margin">5</property>
+                <property name="bottom-margin">5</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -109,6 +113,10 @@
                 <property name="can-focus">True</property>
                 <property name="editable">False</property>
                 <property name="wrap-mode">word</property>
+                <property name="left-margin">5</property>
+                <property name="right-margin">5</property>
+                <property name="top-margin">5</property>
+                <property name="bottom-margin">5</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -128,7 +136,7 @@
           <object class="GtkBox" id="CommandBox">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="spacing">6</property>
+            <property name="spacing">5</property>
             <property name="homogeneous">True</property>
             <child>
               <object class="GtkBox" id="VolumeButtonSubBox">
