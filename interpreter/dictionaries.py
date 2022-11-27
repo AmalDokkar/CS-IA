@@ -1,12 +1,12 @@
 
-code_to_lang = {"en": "english",
-                "es": "spanish",
-                "fr": "french",
-                "de": "german"}
+code_to_lang = {"en": "English",
+                "es": "Spanish",
+                "fr": "French",
+                "de": "German"}
 
-lang_to_code = {"english": "en",
-                "spanish": "es",
-                "french": "fr",
-                "german": "de"}
+lang_to_code = {"English": "en",
+                "Spanish": "es",
+                "French": "fr",
+                "German": "de"}
                 
-languages = ["english", "spanish", "french", "german"]
+languages = ["English", "Spanish", "French", "German"]

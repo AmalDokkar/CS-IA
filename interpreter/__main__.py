@@ -14,7 +14,7 @@ from gi.repository import Gtk, Gio
 
 from interpreter import Interpreter
 from handler import Handler
-import dictionaries as dic # try import dictionaries as dic
+import dictionaries as dic
 
 ######################################################
 

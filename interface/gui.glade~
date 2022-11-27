@@ -48,7 +48,7 @@
                       <object class="GtkImage" id="SwitchImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="pixbuf">images/switch.png</property>
+                        <property name="pixbuf">switch.png</property>
                       </object>
                     </child>
                   </object>
@@ -91,37 +91,51 @@
             <property name="spacing">6</property>
             <property name="homogeneous">True</property>
             <child>
-              <object class="GtkTextView" id="SpokenTextView">
+              <object class="GtkScrolledWindow" id="SpokenTextScrollable">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="editable">False</property>
-                <property name="wrap-mode">word</property>
-                <property name="left-margin">5</property>
-                <property name="right-margin">5</property>
-                <property name="top-margin">5</property>
-                <property name="bottom-margin">5</property>
+                <property name="shadow-type">in</property>
+                <child>
+                  <object class="GtkTextView" id="SpokenTextView">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="editable">False</property>
+                    <property name="wrap-mode">word</property>
+                    <property name="left-margin">5</property>
+                    <property name="right-margin">5</property>
+                    <property name="top-margin">5</property>
+                    <property name="bottom-margin">5</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">0</property>
+                <property name="position">2</property>
               </packing>
             </child>
             <child>
-              <object class="GtkTextView" id="TranslatedTextView">
+              <object class="GtkScrolledWindow" id="TranslatedTextScrollable">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="editable">False</property>
-                <property name="wrap-mode">word</property>
-                <property name="left-margin">5</property>
-                <property name="right-margin">5</property>
-                <property name="top-margin">5</property>
-                <property name="bottom-margin">5</property>
+                <property name="shadow-type">in</property>
+                <child>
+                  <object class="GtkTextView" id="TranslatedTextView">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="editable">False</property>
+                    <property name="wrap-mode">word</property>
+                    <property name="left-margin">5</property>
+                    <property name="right-margin">5</property>
+                    <property name="top-margin">5</property>
+                    <property name="bottom-margin">5</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </object>
@@ -151,6 +165,7 @@
                     <property name="halign">end</property>
                     <property name="relief">none</property>
                     <property name="orientation">vertical</property>
+                    <property name="value">0.25</property>
                     <property name="icons">audio-volume-muted-symbolic
 audio-volume-high-symbolic
 audio-volume-low-symbolic
@@ -206,6 +221,7 @@ audio-volume-medium-symbolic</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
+                    <property name="tooltip-text" translatable="yes">Copy translated text</property>
                     <property name="halign">end</property>
                     <signal name="clicked" handler="on_clicked_copyclipboard" swapped="no"/>
                     <child>
@@ -243,6 +259,7 @@ audio-volume-medium-symbolic</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="title" translatable="yes">Interpreter</property>
+        <property name="spacing">0</property>
         <property name="show-close-button">True</property>
       </object>
     </child>
