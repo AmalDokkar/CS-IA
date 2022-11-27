@@ -21,3 +21,6 @@ with sr.Microphone(sample_rate=44100, device_index=9) as source:
 
 # Theoretically, a confusing sentence for STT
 # "Let's wreck a nice beach" and "Let's recognize speech"
+
+# UnknownValueError at 30 seconds
+# WaitTimeoutError also at 30 seconds

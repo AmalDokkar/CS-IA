@@ -99,7 +99,3 @@ class Interpreter():
 		print("Audio played")
 		os.remove(self.path + "/temp.mp3")
 		time.sleep(1)
-
-
-# UnknownValueError at 30 seconds
-# WaitTimeoutError also at 30 seconds

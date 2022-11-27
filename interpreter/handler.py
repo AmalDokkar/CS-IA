@@ -9,7 +9,7 @@ from playsound import playsound
 import mute_alsa as mute_alsa
 
 import gi
-gi.require_version("Gtk", "3.0") # Really necessary? yes
+gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk
 
 from interpreter import Interpreter
