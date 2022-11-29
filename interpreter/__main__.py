@@ -17,8 +17,6 @@ from interpreter import Interpreter
 from handler import Handler
 import dictionaries as dic
 
-######################################################
-
 
 builder = Gtk.Builder()
 builder.add_from_file("interface/gui.glade")

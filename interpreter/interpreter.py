@@ -1,16 +1,17 @@
 import os
 import time
-from threading import Thread
 
+from threading import Thread
 from googletrans import Translator
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
-import mute_alsa as mute_alsa
+import mute_alsa
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk
+gi.require_version("Gdk", "3.0")
+from gi.repository import Gtk, Gdk, Gio
 
 import dictionaries as dic
 
@@ -39,7 +40,7 @@ class Interpreter():
 
 	def start(self):
 		self.global_status = "interpreting"
-		t = Thread(target=self.interp_recognize)
+		t = Thread(target=self.interpreter_recognize)
 		t.start()
 
 	def stop(self):
@@ -60,7 +61,7 @@ class Interpreter():
 	def get_translated_text(self, idx):
 		return self.translated_texts[idx]
 		
-	def interp_recognize(self):
+	def interpreter_recognize(self):
 		if self.global_status == "paused":
 			return
 		
@@ -79,20 +80,20 @@ class Interpreter():
 				print("Text recognized")
 			except sr.WaitTimeoutError:
 				print("WaitTimeoutError")
-				t = Thread(target=self.interp_recognize)
+				t = Thread(target=self.interpreter_recognize)
 				t.start()
 			except sr.UnknownValueError:
 				print("UnknownValueError")
-				t = Thread(target=self.interp_recognize)
+				t = Thread(target=self.interpreter_recognize)
 				t.start()
 			else:
 				self.transcribed_texts.append(text)
 				self.spoken_text_callback(text)
-				t = Thread(target=self.interp_recognize)
+				t = Thread(target=self.interpreter_recognize)
 				t.start()
-				self.interp_translate(text)
+				self.interpreter_translate(text)
 
-	def interp_translate(self, text):
+	def interpreter_translate(self, text):
 		# if self.global_status == 'paused':
 		# 	return
 		translation = self.translator.translate(text, dest=self.dest_lang, src=self.src_lang)
@@ -100,9 +101,9 @@ class Interpreter():
 		text = translation.text
 		self.translated_texts.append(text)
 		self.translated_text_callback(text)
-		self.inter_reproduce(text)
+		self.interpreter_reproduce(text)
 
-	def inter_reproduce(self, text):
+	def interpreter_reproduce(self, text):
 		# if self.global_status == 'paused':
 		# 	return
 		tts = gTTS(text, lang=self.dest_lang)

@@ -48,7 +48,7 @@
                       <object class="GtkImage" id="SwitchImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="pixbuf">switch.png</property>
+                        <property name="pixbuf">images/switch.png</property>
                       </object>
                     </child>
                   </object>
@@ -111,7 +111,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
@@ -167,7 +167,7 @@
                       <object class="GtkImage" id="LeftArrowImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="pixbuf">left-arrow.png</property>
+                        <property name="pixbuf">images/left-arrow.png</property>
                       </object>
                     </child>
                   </object>
@@ -188,7 +188,7 @@
                       <object class="GtkImage" id="RigthArrowImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="pixbuf">right-arrow.png</property>
+                        <property name="pixbuf">images/right-arrow.png</property>
                       </object>
                     </child>
                   </object>
@@ -207,12 +207,43 @@
             </child>
             <child>
               <object class="GtkToggleButton" id="PlayPauseToggleButton">
-                <property name="label" translatable="yes">Play</property>
                 <property name="width-request">130</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <signal name="toggled" handler="on_toggled_button" swapped="no"/>
+                <child>
+                  <object class="GtkBox" id="PlayPauseSubBox">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-left">5</property>
+                    <child>
+                      <object class="GtkImage" id="PlayPauseImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="pixbuf">images/play.png</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="PlayPauseLabel">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">Play</property>
+                        <property name="justify">center</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -258,7 +289,7 @@
                       <object class="GtkImage" id="SoundImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="pixbuf">volume.png</property>
+                        <property name="pixbuf">images/volume.png</property>
                       </object>
                     </child>
                   </object>

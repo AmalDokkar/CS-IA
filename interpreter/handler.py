@@ -6,15 +6,17 @@ from googletrans import Translator
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
-import mute_alsa as mute_alsa
+import mute_alsa
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk
+gi.require_version("Gdk", "3.0")
+from gi.repository import Gtk, Gdk, Gio
 
 from interpreter import Interpreter
 import dictionaries as dic
 
+# Things that need to be named again for CSS to recognize them
 cssList = ["RightArrowButton", "LeftArrowButton"]
 
 
@@ -46,12 +48,35 @@ class Handler():
 	def on_toggled_button(self, button):
 		active = button.get_active()
 
+		label = self.builder.get_object("PlayPauseLabel")
+		image = self.builder.get_object("PlayPauseImage")
+		src = self.builder.get_object("SrcLangComboBox")
+		dest = self.builder.get_object("DestLangComboBox")
+		switch = self.builder.get_object("SwitchButton")
+		sound = self.builder.get_object("SoundButton")
+		copy = self.builder.get_object("CopyClipboard")
+
 		if active:
-			button.set_label("Pause")
+			label.set_text("Pause")
+			image.set_from_file("/home/amaldok/Prog/CS-IA/interface/images/pause.png")
 			self.interpreter.start()
+
+			src.set_sensitive(False)
+			dest.set_sensitive(False)
+			switch.set_sensitive(False)
+			sound.set_sensitive(False)
+			copy.set_sensitive(False)
+
 		else:
-			button.set_label("Play")
+			label.set_text("Play")
+			image.set_from_file("/home/amaldok/Prog/CS-IA/interface/images/play.png")
 			self.interpreter.stop()
+
+			src.set_sensitive(True)
+			dest.set_sensitive(True)
+			switch.set_sensitive(True)
+			sound.set_sensitive(True)
+			copy.set_sensitive(True)
 
 	def on_changed_src_lang(self, comboBox):
 		lang = comboBox.get_active_text()
@@ -89,15 +114,16 @@ class Handler():
 	def display_spoken_text(self, text):
 		srcBuffer = Gtk.TextBuffer()
 		i = srcBuffer.get_start_iter()
-		srcBuffer.do_insert_text(srcBuffer, i, text, len(text)+1) # O si no se come la ultima letra
+		srcBuffer.do_insert_text(srcBuffer, i, text, len(text))
 		srcTextView = self.builder.get_object("SpokenTextView")
 		srcTextView.set_buffer(srcBuffer)
 
 		self.current_idx = self.interpreter.get_size()-1
 		rArrow = self.builder.get_object("RightArrowButton")
 		rArrow.set_sensitive(False)
-		lArrow = self.builder.get_object("LeftArrowButton")
-		lArrow.set_sensitive(True)
+		if (self.current_idx > 0):
+			lArrow = self.builder.get_object("LeftArrowButton")
+			lArrow.set_sensitive(True)
 
 	def display_translated_text(self, text):
 		destBuffer = Gtk.TextBuffer()
@@ -113,7 +139,7 @@ class Handler():
 		end = destBuffer.get_end_iter()
 		text = destBuffer.get_text(start, end, False)
 
-		self.interpreter.inter_reproduce(text)
+		self.interpreter.interpreter_reproduce(text)
 
 	def on_rightarrow_clicked(self, button):
 		sz = self.interpreter.get_size()
