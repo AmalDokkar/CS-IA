@@ -153,33 +153,21 @@
             <property name="spacing">5</property>
             <property name="homogeneous">True</property>
             <child>
-              <object class="GtkBox" id="VolumeButtonSubBox">
+              <object class="GtkBox" id="LeftSubBox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <child>
-                  <object class="GtkVolumeButton" id="VolumeButton">
+                  <object class="GtkButton" id="LeftArrowButton">
                     <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="focus-on-click">False</property>
+                    <property name="can-focus">False</property>
                     <property name="receives-default">True</property>
-                    <property name="halign">end</property>
-                    <property name="relief">none</property>
-                    <property name="orientation">vertical</property>
-                    <property name="value">0.25</property>
-                    <property name="icons">audio-volume-muted-symbolic
-audio-volume-high-symbolic
-audio-volume-low-symbolic
-audio-volume-medium-symbolic</property>
-                    <child internal-child="plus_button">
-                      <object class="GtkButton">
+                    <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="on_leftarrow_clicked" swapped="no"/>
+                    <child>
+                      <object class="GtkImage" id="LeftArrowImage">
+                        <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="receives-default">False</property>
-                      </object>
-                    </child>
-                    <child internal-child="minus_button">
-                      <object class="GtkButton">
-                        <property name="can-focus">False</property>
-                        <property name="receives-default">False</property>
+                        <property name="pixbuf">left-arrow.png</property>
                       </object>
                     </child>
                   </object>
@@ -187,6 +175,27 @@ audio-volume-medium-symbolic</property>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="RightArrowButton">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="receives-default">True</property>
+                    <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="on_rightarrow_clicked" swapped="no"/>
+                    <child>
+                      <object class="GtkImage" id="RigthArrowImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="pixbuf">right-arrow.png</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
               </object>
@@ -212,10 +221,10 @@ audio-volume-medium-symbolic</property>
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="CopyClipboardSubBox">
+              <object class="GtkBox" id="RightSubBox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="orientation">vertical</property>
+                <property name="spacing">5</property>
                 <child>
                   <object class="GtkButton" id="CopyClipboard">
                     <property name="visible">True</property>
@@ -235,13 +244,35 @@ audio-volume-medium-symbolic</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
+                    <property name="pack-type">end</property>
                     <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="SoundButton">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <child>
+                      <object class="GtkImage" id="SoundImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="pixbuf">volume.png</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="pack-type">end</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
+                <property name="pack-type">end</property>
                 <property name="position">2</property>
               </packing>
             </child>

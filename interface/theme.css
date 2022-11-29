@@ -1,0 +1,10 @@
+
+button#RightArrowButton {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+button#LeftArrowButton {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}

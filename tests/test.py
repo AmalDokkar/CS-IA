@@ -1,12 +1,11 @@
 import speech_recognition as sr
 
-
 recognizer = sr.Recognizer()
 recognizer.pause_threshold = 1
 
 print(sr.Microphone.list_microphone_names())
 
-with sr.Microphone(sample_rate=44100, device_index=9) as source:
+with sr.Microphone(sample_rate=44100, device_index=14) as source:
     try:
         print("Speak now")
         audio = recognizer.listen(source, timeout=10, phrase_time_limit=30)

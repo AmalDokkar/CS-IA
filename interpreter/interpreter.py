@@ -24,6 +24,8 @@ class Interpreter():
 
 		self.src_lang = "es"
 		self.dest_lang = "en"
+		self.transcribed_texts = []
+		self.translated_texts = []
 		
 		self.recognizer = sr.Recognizer()
 		self.recognizer.pause_threshold = 1
@@ -48,6 +50,15 @@ class Interpreter():
 
 	def set_dest_lang(self, lang="en"):
 		self.dest_lang = lang
+
+	def get_size(self):
+		return len(self.transcribed_texts)
+
+	def get_transcribed_text(self, idx):
+		return self.transcribed_texts[idx]
+
+	def get_translated_text(self, idx):
+		return self.translated_texts[idx]
 		
 	def interp_recognize(self):
 		if self.global_status == "paused":
@@ -56,7 +67,7 @@ class Interpreter():
 		# For file
 		# with sr.AudioFile("/home/amaldok/Prog/CS-IA/tests/rec.wav") as source:
 		# For microphone
-		with sr.Microphone(sample_rate=44100, device_index=9) as source:
+		with sr.Microphone(sample_rate=44100, device_index=14) as source:
 			try:
 				print("Speak now") # Send signal
 				# For microphone
@@ -75,6 +86,7 @@ class Interpreter():
 				t = Thread(target=self.interp_recognize)
 				t.start()
 			else:
+				self.transcribed_texts.append(text)
 				self.spoken_text_callback(text)
 				t = Thread(target=self.interp_recognize)
 				t.start()
@@ -85,9 +97,10 @@ class Interpreter():
 		# 	return
 		translation = self.translator.translate(text, dest=self.dest_lang, src=self.src_lang)
 		print("Text translated")
-		self.translated_text_callback(translation.text)
-		print(text)
-		self.inter_reproduce(translation.text)
+		text = translation.text
+		self.translated_texts.append(text)
+		self.translated_text_callback(text)
+		self.inter_reproduce(text)
 
 	def inter_reproduce(self, text):
 		# if self.global_status == 'paused':

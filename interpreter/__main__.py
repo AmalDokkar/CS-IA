@@ -9,23 +9,15 @@ from playsound import playsound
 import mute_alsa
 
 import gi
-gi.require_version("Gtk", "3.0") # Really necessary?
-from gi.repository import Gtk, Gio
+gi.require_version("Gtk", "3.0")
+gi.require_version("Gdk", "3.0")
+from gi.repository import Gtk, Gdk, Gio
 
 from interpreter import Interpreter
 from handler import Handler
 import dictionaries as dic
 
 ######################################################
-
-def start_menus(builder):
-	src = builder.get_object("SrcLangComboBox")
-	dest = builder.get_object("DestLangComboBox")
-	for i in range(4):
-		src.append_text(dic.languages[i])
-		dest.append_text(dic.languages[i])
-	src.set_active(1)
-	dest.set_active(0)
 
 
 builder = Gtk.Builder()
@@ -34,7 +26,10 @@ builder.add_from_file("interface/gui.glade")
 handler = Handler(builder)
 builder.connect_signals(handler)
 
-start_menus(builder)
+screen = Gdk.Screen.get_default()
+provider = Gtk.CssProvider()
+provider.load_from_path("/home/amaldok/Prog/CS-IA/interface/theme.css")
+Gtk.StyleContext.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
 window = builder.get_object("MainWindow")
 window.connect("destroy", Gtk.main_quit)
