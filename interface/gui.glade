@@ -167,7 +167,7 @@
                       <object class="GtkImage" id="LeftArrowImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="pixbuf">images/left-arrow.png</property>
+                        <property name="icon-name">go-previous</property>
                       </object>
                     </child>
                   </object>
@@ -188,7 +188,7 @@
                       <object class="GtkImage" id="RigthArrowImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="pixbuf">images/right-arrow.png</property>
+                        <property name="icon-name">go-next</property>
                       </object>
                     </child>
                   </object>
@@ -289,7 +289,7 @@
                       <object class="GtkImage" id="SoundImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="pixbuf">images/volume.png</property>
+                        <property name="icon-name">audio-volume-high</property>
                       </object>
                     </child>
                   </object>

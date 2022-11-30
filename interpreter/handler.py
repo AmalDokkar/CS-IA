@@ -58,6 +58,7 @@ class Handler():
 
 		if active:
 			label.set_text("Pause")
+			# try with set_from_icon_name and use standard ones
 			image.set_from_file("/home/amaldok/Prog/CS-IA/interface/images/pause.png")
 			self.interpreter.start()
 
