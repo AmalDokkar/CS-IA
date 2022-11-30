@@ -58,8 +58,7 @@ class Handler():
 
 		if active:
 			label.set_text("Pause")
-			# try with set_from_icon_name and use standard ones
-			image.set_from_file("/home/amaldok/Prog/CS-IA/interface/images/pause.png")
+			image.set_from_icon_name("media-playback-pause", 2)
 			self.interpreter.start()
 
 			src.set_sensitive(False)
@@ -70,7 +69,7 @@ class Handler():
 
 		else:
 			label.set_text("Play")
-			image.set_from_file("/home/amaldok/Prog/CS-IA/interface/images/play.png")
+			image.set_from_icon_name("media-playback-start", 2)
 			self.interpreter.stop()
 
 			src.set_sensitive(True)
