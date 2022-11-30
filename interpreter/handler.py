@@ -111,19 +111,20 @@ class Handler():
 		clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
 		clipboard.set_text(text, len(text))
 
-	def display_spoken_text(self, text):
+	def display_spoken_text(self, text, newSentence):
 		srcBuffer = Gtk.TextBuffer()
 		i = srcBuffer.get_start_iter()
 		srcBuffer.do_insert_text(srcBuffer, i, text, len(text))
 		srcTextView = self.builder.get_object("SpokenTextView")
 		srcTextView.set_buffer(srcBuffer)
 
-		self.current_idx = self.interpreter.get_size()-1
-		rArrow = self.builder.get_object("RightArrowButton")
-		rArrow.set_sensitive(False)
-		if (self.current_idx > 0):
-			lArrow = self.builder.get_object("LeftArrowButton")
-			lArrow.set_sensitive(True)
+		if newSentence:
+			self.current_idx = self.interpreter.get_size()-1
+			rArrow = self.builder.get_object("RightArrowButton")
+			rArrow.set_sensitive(False)
+			if (self.current_idx > 0):
+				lArrow = self.builder.get_object("LeftArrowButton")
+				lArrow.set_sensitive(True)
 
 	def display_translated_text(self, text):
 		destBuffer = Gtk.TextBuffer()
@@ -154,18 +155,9 @@ class Handler():
 			rArrow.set_sensitive(False)
 
 		srcText = self.interpreter.get_transcribed_text(self.current_idx)
-		srcBuffer = Gtk.TextBuffer()
-		i = srcBuffer.get_start_iter()
-		srcBuffer.do_insert_text(srcBuffer, i, srcText, len(srcText))
-		srcTextView = self.builder.get_object("SpokenTextView")
-		srcTextView.set_buffer(srcBuffer)
-
+		self.display_spoken_text(srcText, False)
 		destText = self.interpreter.get_translated_text(self.current_idx)
-		destBuffer = Gtk.TextBuffer()
-		i = destBuffer.get_start_iter()
-		destBuffer.do_insert_text(destBuffer, i, destText, len(destText))
-		destTextView = self.builder.get_object("TranslatedTextView")
-		destTextView.set_buffer(destBuffer)
+		self.display_translated_text(destText)
 
 	def on_leftarrow_clicked(self, button):
 		sz = self.interpreter.get_size()
@@ -180,15 +172,6 @@ class Handler():
 			lArrow.set_sensitive(False)
 
 		srcText = self.interpreter.get_transcribed_text(self.current_idx)
-		srcBuffer = Gtk.TextBuffer()
-		i = srcBuffer.get_start_iter()
-		srcBuffer.do_insert_text(srcBuffer, i, srcText, len(srcText))
-		srcTextView = self.builder.get_object("SpokenTextView")
-		srcTextView.set_buffer(srcBuffer)
-
+		self.display_spoken_text(srcText, False)
 		destText = self.interpreter.get_translated_text(self.current_idx)
-		destBuffer = Gtk.TextBuffer()
-		i = destBuffer.get_start_iter()
-		destBuffer.do_insert_text(destBuffer, i, destText, len(destText))
-		destTextView = self.builder.get_object("TranslatedTextView")
-		destTextView.set_buffer(destBuffer)
+		self.display_translated_text(destText)

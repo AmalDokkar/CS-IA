@@ -25,7 +25,7 @@ class Interpreter():
 
 		self.src_lang = "es"
 		self.dest_lang = "en"
-		self.transcribed_texts = []
+		self.transcribed_texts = [] # ha d'incloure l'idioma
 		self.translated_texts = []
 		
 		self.recognizer = sr.Recognizer()
@@ -68,7 +68,7 @@ class Interpreter():
 		# For file
 		# with sr.AudioFile("/home/amaldok/Prog/CS-IA/tests/rec.wav") as source:
 		# For microphone
-		with sr.Microphone(sample_rate=44100, device_index=14) as source:
+		with sr.Microphone(sample_rate=44100, device_index=10) as source:
 			try:
 				print("Speak now") # Send signal
 				# For microphone
@@ -88,7 +88,7 @@ class Interpreter():
 				t.start()
 			else:
 				self.transcribed_texts.append(text)
-				self.spoken_text_callback(text)
+				self.spoken_text_callback(text, True)
 				t = Thread(target=self.interpreter_recognize)
 				t.start()
 				self.interpreter_translate(text)
@@ -112,4 +112,3 @@ class Interpreter():
 		playsound(self.path + "/temp.mp3")
 		print("Audio played")
 		os.remove(self.path + "/temp.mp3")
-		time.sleep(1)
