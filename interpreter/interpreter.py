@@ -64,7 +64,7 @@ class Interpreter():
 	def interpreter_recognize(self):
 		if self.global_status == "paused":
 			return
-		
+		# print(sr.Microphone.list_microphone_names())
 		# For file
 		# with sr.AudioFile("/home/amaldok/Prog/CS-IA/tests/rec.wav") as source:
 		# For microphone

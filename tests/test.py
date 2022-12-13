@@ -5,7 +5,7 @@ recognizer.pause_threshold = 1
 
 print(sr.Microphone.list_microphone_names())
 
-with sr.Microphone(sample_rate=44100, device_index=14) as source:
+with sr.Microphone(sample_rate=44100, device_index=10) as source:
     try:
         print("Speak now")
         audio = recognizer.listen(source, timeout=10, phrase_time_limit=30)
