@@ -8,7 +8,7 @@ from googletrans import Translator
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
-import mute_alsa
+import mute_alsa # REMOVE
 
 # Interface
 import gi
