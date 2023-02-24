@@ -24,7 +24,7 @@ class Interpreter():
 	"Translates, reproduces sound, stores translation history"
 
 	def __init__(self, display_spoken_text, display_translated_text):
-		self.global_status = "paused"
+		self.status = "paused"
 		self.path = os.getcwd() 			# Full path to temporarily store audio files
 
 		self.src_lang = "es"				# Set defaults
@@ -48,12 +48,12 @@ class Interpreter():
 
 	# Play/pause
 	def start(self):
-		self.global_status = "interpreting"
+		self.status = "interpreting"
 		t = Thread(target=self.interpreter_recognize)
 		t.start()
 
 	def stop(self):
-		self.global_status = "paused"
+		self.status = "paused"
 
 	# Language setters
 	def set_src_lang(self, lang="es"):
@@ -81,7 +81,7 @@ class Interpreter():
 		# Reproduce
 	
 	def interpreter_recognize(self):
-		if self.global_status == "paused":
+		if self.status == "paused":
 			return
 		
 		with sr.Microphone(sample_rate=44100, device_index=self.input_idx) as source:
