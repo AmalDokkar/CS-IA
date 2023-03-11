@@ -1,6 +1,5 @@
 # General
 import os
-import time
 from threading import Thread
 
 # External modules
