@@ -1,4 +1,6 @@
 
+# For portraying purposes. More languages can be added
+
 code_to_lang = {"en": "English",
                 "es": "Spanish",
                 "fr": "French",

@@ -102,7 +102,7 @@ class Interpreter():
 				self.transcribed_texts.append(text)		# Update translation history
 				self.spoken_text_callback(text, True)	# Display transcribed text
 				t = Thread(target=self.interpreter_recognize)
-				t.start()								# Start new thead
+				t.start()								# Start new thread
 				self.interpreter_translate(text)		# Continue interpretation process -> translate
 
 	def interpreter_translate(self, text):

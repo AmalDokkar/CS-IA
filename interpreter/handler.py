@@ -47,7 +47,7 @@ class Handler():
 			widget = self.builder.get_object(name)
 			widget.set_name(name) # Assign same name
 
-		# Set arrows unsensitive 
+		# Set arrows insensitive 
 		rArrow = self.builder.get_object("RightArrowButton")
 		rArrow.set_sensitive(False)
 		lArrow = self.builder.get_object("LeftArrowButton")
@@ -71,7 +71,7 @@ class Handler():
 			image.set_from_icon_name("media-playback-pause", 2)
 			self.interpreter.start() # Start interpreting
 
-			# Set unsensitive
+			# Set insensitive
 			src.set_sensitive(False)
 			dest.set_sensitive(False)
 			switch.set_sensitive(False)
@@ -159,7 +159,7 @@ class Handler():
 		self.current_idx += 1
 		lArrow = self.builder.get_object("LeftArrowButton")
 		lArrow.set_sensitive(True)
-		if (self.current_idx + 1 == sz): # If last, set right unsensitive
+		if (self.current_idx + 1 == sz): # If last, set right insensitive
 			rArrow = self.builder.get_object("RightArrowButton")
 			rArrow.set_sensitive(False)
 
@@ -177,7 +177,7 @@ class Handler():
 		self.current_idx -= 1
 		rArrow = self.builder.get_object("RightArrowButton")
 		rArrow.set_sensitive(True)
-		if (self.current_idx == 0): # If first, set left unsentive
+		if (self.current_idx == 0): # If first, set left insentive
 			lArrow = self.builder.get_object("LeftArrowButton")
 			lArrow.set_sensitive(False)
 
