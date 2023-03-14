@@ -1,4 +1,6 @@
 
+<< INTERPRETER APPLICATION >>
+
 Requirements:
 	Python3
 	Linux OS (GTK+3 is already installed on Linux)
