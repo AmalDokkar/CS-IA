@@ -7,7 +7,6 @@ from googletrans import Translator
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
-import mute_alsa # REMOVE
 
 # Interface
 import gi
@@ -85,10 +84,10 @@ class Interpreter():
 		
 		with sr.Microphone(sample_rate=44100, device_index=self.input_idx) as source:
 			try:
-				audio = self.recognizer.listen(source, timeout=10, phrase_time_limit=10) # Record a phrase
+				audio = self.recognizer.listen(source, timeout=10, phrase_time_limit=5) # Record a phrase
 				text = self.recognizer.recognize_google(audio, language=self.src_lang)   # Recognize speech
 
-			except sr.WaitTimeoutError: # User has no spoken within limit time
+			except sr.WaitTimeoutError: # User has not spoken within limit time
 				print("WaitTimeoutError")
 				t = Thread(target=self.interpreter_recognize)
 				t.start() # Start new thread

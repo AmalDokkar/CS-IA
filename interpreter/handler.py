@@ -7,7 +7,6 @@ from googletrans import Translator
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
-import mute_alsa # REMOVE
 
 # Interface
 import gi
@@ -120,12 +119,12 @@ class Handler():
 		if self.current_idx != -1:
 			text = self.interpreter.get_translated_text(self.current_idx)
 			clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
-			clipboard.set_text(text, len(text)) # Set text on clipboard
+			clipboard.set_text(text, len(text.encode())) # Set text on clipboard
 
 	def display_spoken_text(self, text, newSentence):
 		srcBuffer = Gtk.TextBuffer() 							# Create new buffer
 		i = srcBuffer.get_start_iter()
-		srcBuffer.do_insert_text(srcBuffer, i, text, len(text)) # Put text on buffer
+		srcBuffer.do_insert_text(srcBuffer, i, text, len(text.encode())) # Put text on buffer
 		srcTextView = self.builder.get_object("SpokenTextView")
 		srcTextView.set_buffer(srcBuffer) 						# Put buffer on text view
 
@@ -140,7 +139,7 @@ class Handler():
 	def display_translated_text(self, text):
 		destBuffer = Gtk.TextBuffer() 								# Create new buffer
 		i = destBuffer.get_start_iter()
-		destBuffer.do_insert_text(destBuffer, i, text, len(text)) 	# Put text on buffer
+		destBuffer.do_insert_text(destBuffer, i, text, len(text.encode())) 	# Put text on buffer
 		destTextView = self.builder.get_object("TranslatedTextView")
 		destTextView.set_buffer(destBuffer) 						# Put buffer on text view
 

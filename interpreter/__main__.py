@@ -7,7 +7,6 @@ from googletrans import Translator
 import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
-import mute_alsa # REMOVE
 
 # Interface
 import gi
@@ -23,7 +22,8 @@ import dictionaries as dic
 
 # The Builder class creates the interface objects (widgets) from file
 builder = Gtk.Builder()
-builder.add_from_file("interface/gui.glade")
+print(os.getcwd())
+builder.add_from_file("interpreter/interface/gui.glade")
 
 # Join signal-response pairs managed by the Handler class
 handler = Handler(builder)
@@ -32,7 +32,7 @@ builder.connect_signals(handler)
 # Load CSS theme
 screen = Gdk.Screen.get_default()
 provider = Gtk.CssProvider()
-provider.load_from_path("/home/amaldok/Prog/CS-IA/interface/theme.css") # full path needed
+provider.load_from_path(os.getcwd() + "/interpreter/interface/theme.css") # full path needed
 Gtk.StyleContext.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
 # Load main window
